@@ -1,30 +1,31 @@
 ﻿using System;
+using static System.Console;
 
 namespace Task6
 {
     class Program
     {
-        public static double Input(string name)
+        public static double Input(string name) // проверка ввода числа
         {
-            double number;
-            bool ok;
+            double number; // переменная для числа
+            bool ok; // показатель корректности ввода
             do
             {
                 try
                 {
-                    Console.WriteLine("Введите число {0}", name);
-                    number = Convert.ToDouble(Console.ReadLine());
+                    WriteLine("Введите число {0}", name);
+                    number = Convert.ToDouble(ReadLine());
                     ok = true;
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine("Ошибка при вводе числа");
+                    WriteLine("Ошибка при вводе числа");
                     ok = false;
                     number = 0;
                 }
                 catch (OverflowException)
                 {
-                    Console.WriteLine("Ошибка при вводе числа");
+                    WriteLine("Ошибка при вводе числа");
                     ok = false;
                     number = 0;
                 }
@@ -32,7 +33,7 @@ namespace Task6
             return number;
         }
 
-        public static void Action(double a1, double a2, double a3, int j, double m, double n)
+        public static void Action(double a1, double a2, double a3, int j, double m, double n) // вычисление результата
         {
             while (true)
             {
@@ -41,32 +42,39 @@ namespace Task6
                 a2 = a3;
                 a3 = seq;
                 j++;
-                Console.Write(seq + " ");
+                Write(seq + " ");
                 if (Math.Abs(seq) < m) continue;
-                Console.WriteLine("\n");
-                Console.WriteLine(Math.Abs(seq) == m ? "Равенство |aj| = M выполняется" : "Равенство |aj| = M не выполняется");
-                Console.WriteLine();
+                WriteLine("\n");
+                WriteLine(Math.Abs(seq) == m ? "Равенство |aj| = M выполняется" : "Равенство |aj| = M не выполняется");
+                WriteLine();
                 if (j == n)
-                    Console.WriteLine("J равно N");
+                    WriteLine("J равно N");
                 else if (j > n)
-                    Console.WriteLine("J больше N");
+                    WriteLine("J больше N");
                 else
-                    Console.WriteLine("J меньше N");
+                    WriteLine("J меньше N");
                 break;
             }
         }
 
         public static void Main(string[] args)
         {
-            var a1 = Input("a1");
-            var a2 = Input("a2");
-            var a3 = Input("a3");
-            var m = Input("M");
-            var n = Input("N");
-            Console.WriteLine();
-            Console.Write("Полученная последовательность: " + a1 + " " + a2 + " " + a3 + " ");
-            Action(a1, a2, a3, 4, m, n);
-            Console.Read();
+            bool okay;
+            do
+            {
+                var a1 = Input("a1"); // ввод числа а1
+                var a2 = Input("a2"); // ввод числа а2
+                var a3 = Input("a3"); // ввод числа а3
+                var m = Input("M"); // ввод числа M
+                var n = Input("N"); // ввод числа N
+                WriteLine();
+                Write("Полученная последовательность: " + a1 + " " + a2 + " " + a3 + " ");
+                Action(a1, a2, a3, 4, m, n);
+                Read();
+                WriteLine("Выйти? y - да/n - нет"); //выход из программы
+                var ans = ReadLine();
+                okay = ans == "y";
+            } while (!okay);
         }
     }
 }
